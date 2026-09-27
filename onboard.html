@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>AllTasksPro</title>
+  <meta name="description" content="Join 100,000+ Africans earning weekly. Foreigners pay to connect with you. Withdraw instantly to M-Pesa, MoMo, bank, or crypto.">
+  <meta name="keywords" content="get paid to chat, earn money chatting, AllTasksPro, paid chat">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #F2F2F2; color: #1E293B; font-size: 13px; line-height: 1.45; }
+    .site-wrap { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+
+    header { background: #FFFFFF; border-bottom: 1px solid #E2E8F0; padding: 8px 0; position: sticky; top: 0; z-index: 100; }
+    .header-inner { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .logo { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+    .logo-text { font-size: 1.1rem; font-weight: 800; background: linear-gradient(135deg, #1E3A5F, #C23B22); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .online-badge { background: #F1F5F9; padding: 4px 12px; border-radius: 40px; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .online-dot { width: 7px; height: 7px; background: #10B981; border-radius: 50%; animation: pulse 1.2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+    .trend-up { color: #10B981; font-size: 9px; }
+    .trend-down { color: #EF4444; font-size: 9px; }
+
+    .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 4px 15px rgba(37,211,102,0.4); cursor: pointer; transition: all 0.3s ease; z-index: 1000; text-decoration: none; animation: bounce 2s infinite; }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+
+    .hero { text-align: center; padding: 24px 0 20px; max-width: 900px; margin: 0 auto; }
+    .hero h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; color: #0F172A; }
+    .hero h1 span { background: linear-gradient(135deg, #C23B22, #1E3A5F); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p { color: #475569; max-width: 600px; margin: 0 auto 12px; font-size: 13px; }
+    .hero-buttons { margin: 14px 0 12px; }
+    .btn-primary { background: linear-gradient(135deg, #1E3A5F, #C23B22); color: white; padding: 10px 32px; border-radius: 40px; text-decoration: none; font-weight: 800; font-size: 14px; display: inline-block; box-shadow: 0 3px 10px rgba(0,0,0,0.1); cursor: pointer; border: none; }
+    .btn-primary:hover { transform: scale(1.02); }
+    .features { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 12px 0 0; }
+    .feature { display: flex; align-items: center; gap: 8px; font-size: 11px; color: #334155; background: #FFFFFF; padding: 5px 14px; border-radius: 40px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .trust-badge { background: #1E3A5F; display: inline-block; padding: 4px 16px; border-radius: 40px; font-size: 11px; font-weight: 700; color: white; margin-bottom: 12px; }
+
+    .section-block { margin: 16px 0; background: #FFFFFF; border-radius: 20px; padding: 16px 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+    .discover h2, .global-section h2, .how-it-works h2, .top-earners h2, .faq-section h2 { font-size: 1.25rem; font-weight: 800; margin-bottom: 10px; color: #1E3A5F; }
+    .discover p, .global-section p { color: #334155; margin-bottom: 10px; font-size: 12px; }
+    .discover-list { display: flex; flex-direction: column; gap: 6px; }
+    .discover-item i { color: #C23B22; width: 20px; font-size: 11px; }
+    .discover-item { font-size: 12px; }
+    .global-section { background: linear-gradient(135deg, #F8F4F0, #FEF8F5); }
+    .world-map { max-width: 100%; border-radius: 14px; margin: 10px 0; width: 100%; max-height: 180px; object-fit: cover; }
+
+    .foreigners-banner { background: linear-gradient(135deg, #1E3A5F, #C23B22); border-radius: 20px; padding: 24px; margin: 18px 0; text-align: center; color: white; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: block; }
+    .foreigners-banner:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+    .foreigners-banner h3 { font-size: 1.3rem; margin-bottom: 8px; }
+    .foreigners-banner p { font-size: 12px; opacity: 0.9; margin-bottom: 12px; }
+    .banner-btn { background: white; color: #C23B22; padding: 8px 20px; border-radius: 40px; text-decoration: none; font-weight: 700; display: inline-block; font-size: 12px; }
+
+    .chatter-card { background: linear-gradient(135deg, #059669, #047857); border-radius: 24px; padding: 24px 28px; margin: 18px 0; color: white; position: relative; box-shadow: 0 10px 25px rgba(5,150,105,0.3); }
+    .chatter-card::after { content: ""; position: absolute; bottom: 12px; left: 28px; right: 28px; height: 2px; background: repeating-linear-gradient(90deg,rgba(255,255,255,0.5),rgba(255,255,255,0.5) 10px,transparent 10px,transparent 20px); }
+    .chatter-title { font-size: 14px; font-weight: 500; opacity: 0.9; margin-bottom: 10px; }
+    .chatter-amount { font-size: 32px; font-weight: 800; margin-bottom: 5px; letter-spacing: -0.5px; }
+    .chatter-daily { font-size: 13px; font-weight: 500; opacity: 0.85; margin-bottom: 5px; }
+    .chatter-monthly { font-size: 11px; font-weight: 400; opacity: 0.75; margin-bottom: 16px; }
+    .chatter-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .chatter-note { font-size: 11px; font-weight: 500; opacity: 0.8; display: flex; align-items: center; gap: 6px; }
+    .country-selector-inline { background: rgba(255,255,255,0.15); border-radius: 50px; padding: 5px 14px; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(4px); font-size: 11px; }
+    .country-selector-inline label { font-weight: 500; display: flex; align-items: center; gap: 4px; }
+    .country-selector-inline select { background: white; border: none; padding: 5px 10px; border-radius: 40px; font-size: 11px; font-weight: 600; color: #047857; cursor: pointer; font-family: 'Inter', sans-serif; }
+
+    .withdrawal-notification { background: #1E3A5F; border-radius: 40px; padding: 6px 18px; display: inline-flex; align-items: center; gap: 10px; margin: 8px 0 10px; cursor: pointer; color: white; font-weight: 700; font-size: 12px; }
+    .withdrawal-notification:hover { background: #C23B22; transform: scale(1.02); }
+    .withdrawal-feed { background: #FFFFFF; border-radius: 18px; padding: 12px; margin: 6px 0 16px; border: 1px solid #E2E8F0; display: none; max-height: 340px; overflow-y: auto; }
+    .withdrawal-feed.show { display: block; }
+    .feed-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #F1F5F9; font-size: 11px; font-weight: 500; animation: slideInNew 0.3s ease-out; }
+    @keyframes slideInNew { from{opacity:0;transform:translateY(-12px);} to{opacity:1;transform:translateY(0);} }
+    .time-tag { font-size: 8px; background: #EFF6FF; padding: 1px 6px; border-radius: 20px; color: #2563EB; margin-left: auto; }
+
+    .how-it-works { background: #FFFFFF; border-radius: 20px; padding: 16px 20px; margin: 18px 0; }
+    .steps { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 12px; }
+    .step { text-align: left; min-width: 160px; }
+    .step-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #FFF0EB, #F3E8FF); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; font-size: 1.3rem; }
+    .step p { font-size: 11px; color: #475569; margin-top: 4px; }
+
+    .stats-bar { display: flex; gap: 40px; flex-wrap: wrap; margin: 16px 0; background: white; border-radius: 50px; padding: 8px 24px; }
+    .stat-item h3 { font-size: 1.3rem; font-weight: 800; background: linear-gradient(135deg, #1E3A5F, #C23B22); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+    .top-earners { background: #FFFFFF; border-radius: 20px; padding: 16px 20px; margin: 16px 0; }
+    .earners-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 12px; margin-top: 12px; }
+    .earner-card { display: flex; align-items: center; gap: 10px; background: #FEFAF8; padding: 10px 14px; border-radius: 18px; border-left: 3px solid #C23B22; }
+
+    .payment-methods { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 6px; margin: 12px 0 6px; }
+    .payment-methods span { background: #FFFFFF; padding: 4px 12px; border-radius: 40px; font-size: 11px; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .instant-note { display: inline-block; font-size: 10px; background: #E6F7EC; padding: 4px 18px; border-radius: 40px; color: #1E3A5F; font-weight: 600; margin: 6px 0 14px; }
+
+    .more-services { background: linear-gradient(135deg, #FFF8F5, #FFF0EB); border-radius: 20px; padding: 20px; margin: 18px 0; }
+    .section-header { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+    .section-header h2 { font-size: 1.25rem; font-weight: 800; color: #1E3A5F; margin: 0; }
+    .badge-group { display: flex; gap: 8px; }
+    .hot-badge-header, .new-badge-header { font-size: 10px; font-weight: 800; padding: 4px 12px; border-radius: 30px; display: inline-flex; align-items: center; gap: 4px; }
+    .hot-badge-header { background: #EF4444; color: white; }
+    .new-badge-header { background: #10B981; color: white; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 14px; margin-top: 16px; }
+    .service-card { background: white; padding: 16px; border-radius: 16px; display: flex; gap: 14px; border: 1px solid #FFE2D4; transition: all 0.2s; }
+    .service-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .service-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #1E3A5F, #C23B22); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; flex-shrink: 0; }
+    .service-info { flex: 1; }
+    .service-info h4 { font-size: 14px; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; color: #1E3A5F; }
+    .service-info p { font-size: 11px; color: #475569; line-height: 1.45; margin-bottom: 8px; }
+    .service-info ul { list-style: none; margin-top: 6px; }
+    .service-info li { font-size: 10px; color: #64748B; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+    .service-info li i { color: #10B981; font-size: 9px; width: 14px; }
+    .service-badge { font-size: 8px; font-weight: 800; padding: 2px 8px; border-radius: 20px; }
+    .service-badge.hot { background: #EF4444; color: white; }
+    .service-badge.new { background: #10B981; color: white; }
+
+    .ready-card { background: linear-gradient(135deg, #1E3A5F, #C23B22); border-radius: 20px; padding: 28px 24px; margin: 28px 0; color: white; }
+    .ready-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+    .ready-btn { background: white; color: #C23B22; padding: 10px 24px; border-radius: 60px; text-decoration: none; font-weight: 800; display: inline-flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; border: none; }
+
+    .faq-section { background: #FFFFFF; border-radius: 20px; padding: 16px 20px; margin: 16px 0; }
+    .faq-item { border-bottom: 1px solid #E2E8F0; }
+    .faq-question { font-weight: 800; cursor: pointer; display: flex; justify-content: space-between; padding: 12px 0; color: #1E3A5F; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: 0.3s ease; font-size: 12px; color: #475569; }
+    .faq-item.open .faq-answer { max-height: 480px; padding-bottom: 14px; padding-top: 4px; }
+
+    footer { text-align: left; padding: 18px 0; border-top: 1px solid #E2E8F0; font-size: 10px; color: #64748B; }
+
+    /* ── PayHero payment modal ── */
+    @keyframes popupSlideIn { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+    .pay-modal-overlay { display: none; position: fixed; top:0;left:0;width:100%;height:100%; background:rgba(0,0,0,0.88); z-index:2000; justify-content:center; align-items:center; }
+    .pay-modal-overlay.active { display: flex; }
+    .pay-modal-card { background:white; width:90%; max-width:420px; border-radius:28px; overflow:hidden; animation:popupSlideIn 0.3s ease; box-shadow:0 25px 50px rgba(0,0,0,0.4); }
+    .pay-modal-header { background:linear-gradient(135deg,#667eea,#764ba2); padding:20px; color:white; text-align:center; }
+    .pay-modal-header i { font-size:2rem; margin-bottom:8px; display:block; }
+    .pay-modal-header h3 { font-size:1.1rem; font-weight:800; }
+    .pay-modal-body { padding:20px; }
+    .pay-modal-body label { font-weight:700; font-size:12px; display:block; margin-bottom:6px; }
+    .phone-row { display:flex; border:1px solid #CBD5E1; border-radius:12px; overflow:hidden; margin-bottom:6px; }
+    .phone-prefix { background:#F8FAFC; padding:10px 12px; font-weight:700; font-size:13px; border-right:1px solid #CBD5E1; display:flex; align-items:center; }
+    .phone-row input { flex:1; border:none; outline:none; padding:10px 12px; font-size:13px; font-family:'Inter',sans-serif; }
+    .btn-pay { width:100%; background:linear-gradient(135deg,#11998e,#38ef7d); color:white; border:none; border-radius:12px; padding:12px; font-size:14px; font-weight:800; cursor:pointer; margin-top:10px; transition:0.2s; }
+    .btn-pay:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,0.15); }
+    .btn-pay:disabled { opacity:0.6; transform:none; cursor:not-allowed; }
+    .btn-cancel-pay { width:100%; background:#F1F5F9; color:#475569; border:none; border-radius:12px; padding:10px; font-size:13px; font-weight:600; cursor:pointer; margin-top:8px; transition:0.2s; }
+    .btn-cancel-pay:hover { background:#E2E8F0; }
+    .pm-progress { height:6px; background:#E2E8F0; border-radius:10px; overflow:hidden; margin:12px 0; }
+    .pm-bar { height:100%; background:linear-gradient(90deg,#667eea,#764ba2); border-radius:10px; animation:barSlide 2s linear infinite; }
+    @keyframes barSlide { 0%{width:20%;margin-left:0} 50%{width:60%;margin-left:20%} 100%{width:20%;margin-left:80%} }
+    .pm-status { font-size:11px; color:#64748B; text-align:center; margin-bottom:8px; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 1.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .ready-buttons { flex-direction: column; }
+      .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 26px; }
+      .chatter-card { padding: 18px 20px; }
+      .chatter-amount { font-size: 24px; }
+      .chatter-footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <span class="logo-text">AllTasksPro</span>
+    </a>
+    <div class="online-badge">
+      <span class="online-dot"></span>
+      <span id="onlineCount">3,847</span>
+      <span id="trendIcon" class="trend-up"><i class="fas fa-arrow-up"></i> 12</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="site-wrap">
+    <div class="hero">
+      <div class="trust-badge">🔥 Trusted by 100,000+ Africans</div>
+      <h1>Get Paid to Chat with <span>Lonely Foreigners</span></h1>
+      <p>Foreigners pay to connect with you. Money goes to your AllTasksPro wallet. Withdraw instantly to M-Pesa, MoMo, bank, or crypto.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" id="heroSignupBtn">Start Chat &amp; Earn →</button>
+      </div>
+      <div class="features">
+        <div class="feature"><i class="fas fa-check-circle"></i> Instant withdrawals</div>
+        <div class="feature"><i class="fas fa-headset"></i> 24/7 support</div>
+        <div class="feature"><i class="fas fa-smile"></i> No experience needed</div>
+      </div>
+    </div>
+
+    <div class="section-block discover">
+      <h2>Discover Real Opportunities to Earn by Chatting</h2>
+      <p>AllTasksPro is Africa's leading platform where foreigners pay to connect with you for friendly conversation. Start earning real money from your phone.</p>
+      <div class="discover-list">
+        <div class="discover-item"><i class="fas fa-check-circle"></i> Foreigners pay to connect — you never ask for money</div>
+        <div class="discover-item"><i class="fas fa-check-circle"></i> Money goes to your AllTasksPro wallet, withdraw instantly to M-Pesa, MoMo, or bank</div>
+        <div class="discover-item"><i class="fas fa-check-circle"></i> No experience needed — just be friendly and engaging</div>
+      </div>
+    </div>
+
+    <div class="section-block global-section">
+      <h2>🌍 Global Connections &amp; Income Opportunities</h2>
+      <p>Loneliness affects millions across North America, Europe, Australia and beyond. AllTasksPro connects you with people who value your time — and pay for it.</p>
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjpfb-S4HaycFIYygcwjdIJZYVP3MhyphenhyphenWAjoJtaLX1hS_6FOVBDhW2bvmNRev6x3-Csvd7vFH286Gk0-XkxXUMFy8GCAaZ-42Unl_PX5oHbHP8QJaZdkrCVD0sTMwiMy-K8fcU6FCcxR9LUNuZzbqIgMKvSfD40azI6-cq-bfD6sDbDk_kOow43lS1JkYyfC/s1264/409049.png" alt="World Map" class="world-map">
+    </div>
+
+    <div class="chatter-card">
+      <div class="chatter-title">💬 Typical chatters earn:</div>
+      <div class="chatter-amount" id="chatterAmount">KES 1,500 - 4,500</div>
+      <div class="chatter-daily">daily potential</div>
+      <div class="chatter-monthly" id="monthlyEarning">up to KES 50,000+ in a month for beginners</div>
+      <div class="chatter-footer">
+        <div class="chatter-note"><i class="fas fa-clock"></i> Activate once, earn forever</div>
+        <div class="country-selector-inline">
+          <label><i class="fas fa-map-marker-alt"></i> Country:</label>
+          <select id="countrySelectInline">
+            <option value="KES">🇰🇪 Kenya (KES)</option>
+            <option value="NGN">🇳🇬 Nigeria (₦)</option>
+            <option value="GHS">🇬🇭 Ghana (₵)</option>
+            <option value="UGX">🇺🇬 Uganda (UGX)</option>
+            <option value="TZS">🇹🇿 Tanzania (TSh)</option>
+            <option value="ZAR">🇿🇦 South Africa (R)</option>
+            <option value="RWF">🇷🇼 Rwanda (RF)</option>
+            <option value="ZMW">🇿🇲 Zambia (ZMW)</option>
+            <option value="ETB">🇪🇹 Ethiopia (Br)</option>
+            <option value="XAF">🇨🇲 Cameroon (FCFA)</option>
+            <option value="XOF">🇨🇮 Ivory Coast (CFA)</option>
+            <option value="GMD">🇬🇲 Gambia (D)</option>
+            <option value="MUR">🇲🇺 Mauritius (Rs)</option>
+            <option value="EGP">🇪🇬 Egypt (E£)</option>
+            <option value="MAD">🇲🇦 Morocco (DH)</option>
+            <option value="USD">🌍 Other Countries (USD)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="withdrawal-notification" id="withdrawalBtn">
+        <i class="fas fa-bell"></i> <span id="withdrawalCount">0</span> New instant payouts <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="withdrawal-feed" id="withdrawalFeed"></div>
+    </div>
+
+    <!-- Live foreigners banner -->
+    <a href="foreigners.html" class="foreigners-banner">
+      <h3>💬 Live Foreigners Waiting to Connect</h3>
+      <p>Foreigners from USA, UK, Canada &amp; Europe are online right now. They pay to connect with you.</p>
+      <span class="banner-btn">View Live Foreigners →</span>
+    </a>
+
+    <div class="more-services">
+      <div class="section-header">
+        <h2>💰 More Ways to Earn with AllTasksPro</h2>
+        <div class="badge-group">
+          <span class="hot-badge-header"><i class="fas fa-fire"></i> HOT</span>
+          <span class="new-badge-header">NEW</span>
+        </div>
+      </div>
+      <p style="font-size:12px;color:#475569;margin-bottom:16px;">Multiple earning streams — earn daily from various tasks. Complete simple activities and get paid instantly!</p>
+      <div class="services-grid">
+        <div class="service-card"><div class="service-icon"><i class="fas fa-poll"></i></div><div class="service-info"><h4>Paid Surveys <span class="service-badge new">NEW</span></h4><p>Share your opinions and get paid. Companies want to hear from you!</p><ul><li><i class="fas fa-check-circle"></i> Earn <span class="survey-amount">KES 50 - 500</span> per survey</li><li><i class="fas fa-check-circle"></i> Each survey takes 5–15 minutes</li><li><i class="fas fa-check-circle"></i> 5–10 new surveys available daily</li></ul></div></div>
+        <div class="service-card"><div class="service-icon"><i class="fab fa-spotify"></i></div><div class="service-info"><h4>Earn with Spotify</h4><p>Turn your music listening into cash.</p><ul><li><i class="fas fa-check-circle"></i> Listen to curated playlists</li><li><i class="fas fa-check-circle"></i> Create and share music lists</li><li><i class="fas fa-check-circle"></i> Convert points to real money weekly</li></ul></div></div>
+        <div class="service-card"><div class="service-icon"><i class="fab fa-youtube"></i></div><div class="service-info"><h4>Watch YouTube <span class="service-badge hot">HOT</span></h4><p>Get paid to watch trending videos.</p><ul><li><i class="fas fa-check-circle"></i> Watch videos for 30 seconds minimum</li><li><i class="fas fa-check-circle"></i> Earn up to <span class="youtube-amount">KES 300</span> per hour</li><li><i class="fas fa-check-circle"></i> New tasks added daily</li></ul></div></div>
+        <div class="service-card"><div class="service-icon"><i class="fab fa-tiktok"></i></div><div class="service-info"><h4>TikTok Tasks <span class="service-badge new">NEW</span></h4><p>Earn by engaging with TikTok content.</p><ul><li><i class="fas fa-check-circle"></i> Follow creators and like videos</li><li><i class="fas fa-check-circle"></i> Complete daily challenges</li><li><i class="fas fa-check-circle"></i> Earn <span class="tiktok-amount">KES 200 - 1000</span> daily</li></ul></div></div>
+        <div class="service-card"><div class="service-icon"><i class="fas fa-gamepad"></i></div><div class="service-info"><h4>Spin to Win <span class="service-badge hot">HOT</span></h4><p>Test your luck with daily spins.</p><ul><li><i class="fas fa-check-circle"></i> One free spin every 4 hours</li><li><i class="fas fa-check-circle"></i> Win up to <span class="spin-amount">KES 5,000</span> per spin</li><li><i class="fas fa-check-circle"></i> Jackpot bonuses available</li></ul></div></div>
+      </div>
+    </div>
+
+    <div class="how-it-works">
+      <h2>How AllTasksPro Works – Simple &amp; Transparent</h2>
+      <div class="steps">
+        <div class="step"><div class="step-icon">📝</div><h4>1. Sign up free</h4><p>30 seconds, no credit card</p></div>
+        <div class="step"><div class="step-icon">💬</div><h4>2. Foreigners pay to connect</h4><p>They pay for your time — you just chat friendly</p></div>
+        <div class="step"><div class="step-icon">💰</div><h4>3. Money to your wallet</h4><p>Payment goes to your AllTasksPro account</p></div>
+        <div class="step"><div class="step-icon">💸</div><h4>4. Withdraw instantly</h4><p>M-Pesa, PayPal, Crypto</p></div>
+      </div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat-item"><h3 id="statUsers">112,340</h3><p>Active earners</p></div>
+      <div class="stat-item"><h3 id="paidOutAmount">KES 285M+</h3><p>Paid out</p></div>
+      <div class="stat-item"><h3>4.9★</h3><p>TrustScore</p></div>
+    </div>
+
+    <div class="top-earners"><h2>⭐ Top African earners this month ⭐</h2><div class="earners-grid" id="earnersGrid"></div></div>
+
+    <div class="payment-methods">
+      <span>📱 M-Pesa</span><span>💳 PayPal</span><span>₿ Crypto</span><span>🏦 Bank</span><span>📶 Airtel Money</span><span>🔶 MTN MoMo</span><span>💚 EcoCash</span>
+    </div>
+    <div class="instant-note">⚡ Instant payouts · Min withdrawal <span id="minWithdrawal">KES 650</span> · No hidden fees</div>
+
+    <div class="ready-card">
+      <h2>📱 Ready to start earning real cash?</h2>
+      <p>Create your free account in 30 seconds. Foreigners are waiting to connect with you.</p>
+      <div class="ready-buttons">
+        <button class="ready-btn" id="readySignupBtn"><i class="fas fa-comment-dots"></i> Activate &amp; Start Earning →</button>
+      </div>
+    </div>
+
+    <div class="faq-section">
+      <h2>Frequently Asked Questions (FAQ)</h2>
+      <div class="faq-item"><div class="faq-question">💰 How much can I earn? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Most active members earn <span id="weeklyEarn">KES 2,000 – 15,000+</span> per week. Top performers make over <span id="monthlyEarn">KES 50,000</span> monthly.</div></div>
+      <div class="faq-item"><div class="faq-question">🔒 Is AllTasksPro legitimate? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">100% legitimate. Over 100,000 verified users, 4.9 TrustScore, instant payouts daily.</div></div>
+      <div class="faq-item"><div class="faq-question">💬 Do I need experience? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">None at all! Just be friendly and a good listener.</div></div>
+      <div class="faq-item"><div class="faq-question">📱 How do withdrawals work? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Instant mobile money withdrawals from <span id="withdrawalMin">KES 650</span>. Options: M-Pesa, Airtel Money, MTN MoMo, EcoCash, PayPal, Bank Transfer.</div></div>
+      <div class="faq-item"><div class="faq-question">🌍 Who pays me? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Foreigners pay to connect with you. The money goes directly to your AllTasksPro wallet. You withdraw anytime.</div></div>
+      <div class="faq-item"><div class="faq-question">✅ How to start? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Click "Activate &amp; Start Earning", enter your M-Pesa number, pay the one-time fee and start chatting within minutes.</div></div>
+    </div>
+
+    <footer><p>AllTasksPro · Foreigners pay to connect with you · Money to your wallet · Instant payouts to M-Pesa</p></footer>
+  </div>
+</main>
+
+<!-- ══════════════ PAYHERO PAYMENT MODAL ══════════════ -->
+<div class="pay-modal-overlay" id="payModalOverlay">
+  <div class="pay-modal-card">
+
+    <!-- Step 1 -->
+    <div id="pmStep1">
+      <div class="pay-modal-header">
+        <i class="fas fa-mobile-alt"></i>
+        <h3>Activate Account — KSh 499</h3>
+      </div>
+      <div class="pay-modal-body">
+        <label for="pmPhone">M-Pesa Phone Number</label>
+        <div class="phone-row">
+          <span class="phone-prefix">+254</span>
+          <input type="tel" id="pmPhone" placeholder="712345678" maxlength="9" inputmode="numeric">
+        </div>
+        <small style="color:#94A3B8;font-size:10px;display:block;margin-bottom:12px;">
+          <i class="fas fa-info-circle"></i> 9 digits, no leading 0 or country code
+        </small>
+        <button class="btn-pay" id="pmSendBtn"><i class="fas fa-phone-alt"></i> Send M-Pesa Prompt</button>
+        <button class="btn-cancel-pay" id="pmCancelBtn">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Step 2: processing -->
+    <div id="pmStep2" style="display:none;">
+      <div class="pay-modal-header">
+        <i class="fas fa-spinner fa-spin"></i>
+        <h3>Processing...</h3>
+      </div>
+      <div class="pay-modal-body" style="text-align:center;">
+        <div class="pm-progress"><div class="pm-bar"></div></div>
+        <p id="pmStatusText" class="pm-status">Sending STK push request...</p>
+        <small style="color:#94A3B8;">Check your phone and enter your M-Pesa PIN.</small>
+      </div>
+    </div>
+
+    <!-- Step 3: success -->
+    <div id="pmStep3" style="display:none;">
+      <div class="pay-modal-header" style="background:linear-gradient(135deg,#11998e,#38ef7d);">
+        <i class="fas fa-check-circle"></i>
+        <h3>Payment Confirmed! 🎉</h3>
+      </div>
+      <div class="pay-modal-body" style="text-align:center;">
+        <p style="color:#059669;font-weight:800;font-size:15px;margin-bottom:8px;">Your account is now activated!</p>
+        <p id="pmReceipt" style="font-size:11px;color:#64748B;margin-bottom:10px;"></p>
+        <small style="color:#94A3B8;">Redirecting to the foreigners page...</small>
+      </div>
+    </div>
+
+    <!-- Step 4: failed -->
+    <div id="pmStep4" style="display:none;">
+      <div class="pay-modal-header" style="background:linear-gradient(135deg,#EF4444,#DC2626);">
+        <i class="fas fa-times-circle"></i>
+        <h3>Payment Failed</h3>
+      </div>
+      <div class="pay-modal-body" style="text-align:center;">
+        <p id="pmFailedMsg" style="color:#64748B;font-size:12px;margin-bottom:16px;"></p>
+        <button class="btn-pay" id="pmRetryBtn" style="max-width:200px;margin:0 auto;"><i class="fas fa-redo"></i> Try Again</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ SCRIPTS ══════════════ -->
+<script>
+// ─────────────────────────────────────────────────────────────
+//  PAYHERO CONFIG  — fill in your credentials
+// ─────────────────────────────────────────────────────────────
+const PAYHERO_CONFIG = {
+  basicAuthToken: 'dWNqc0o3MjBpNHpKQWViUEN3WWs6bml4eWc0cE1XdlBiemh6N2d3YUwwd0t3ZElyQ0l3TkxyNnZ5NjE5Qg==',
+  channelId:      6241,
+  amount:         499,
+  callbackUrl:    '',      // public URL for webhook (optional — polling works without it)
+  redirectUrl:    'foreigners.html',
+};
+// ─────────────────────────────────────────────────────────────
+
+const PAYHERO_BASE = 'https://backend.payhero.co.ke/api/v2';
+let pollTimer = null;
+
+// ── Helpers ───────────────────────────────────────────────────
+function normalisePhone(raw) {
+  const d = raw.replace(/\D/g, '');
+  if (/^(07|01)\d{8}$/.test(d))  return '254' + d.slice(1);
+  if (/^[71]\d{8}$/.test(d))     return '254' + d;
+  if (/^254[71]\d{8}$/.test(d))  return d;
+  return null;
+}
+function generateRef() {
+  return 'ATP-' + Date.now() + '-' + Math.random().toString(36).slice(2,8).toUpperCase();
+}
+
+function showPmStep(n) {
+  [1,2,3,4].forEach(i => {
+    const el = document.getElementById('pmStep' + i);
+    if (el) el.style.display = (i === n) ? '' : 'none';
+  });
+}
+function openPayModal() {
+  showPmStep(1);
+  document.getElementById('pmPhone').value = '';
+  document.getElementById('pmSendBtn').disabled = false;
+  document.getElementById('payModalOverlay').classList.add('active');
+  setTimeout(() => document.getElementById('pmPhone').focus(), 200);
+}
+function closePayModal() {
+  clearInterval(pollTimer);
+  document.getElementById('payModalOverlay').classList.remove('active');
+}
+
+// ── PayHero API ───────────────────────────────────────────────
+async function initiateSTK(phone, extRef) {
+  const res = await fetch(`${PAYHERO_BASE}/payments`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Basic ' + PAYHERO_CONFIG.basicAuthToken },
+    body: JSON.stringify({
+      amount: PAYHERO_CONFIG.amount, phone_number: phone,
+      channel_id: PAYHERO_CONFIG.channelId, provider: 'm-pesa',
+      external_reference: extRef, customer_name: 'AllTasksPro User',
+      callback_url: PAYHERO_CONFIG.callbackUrl,
+    }),
+  });
+  if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(e.message || 'PayHero error ' + res.status); }
+  return res.json();
+}
+async function checkStatus(ref) {
+  const res = await fetch(`${PAYHERO_BASE}/transaction-status?reference=${encodeURIComponent(ref)}`, {
+    headers: { 'Authorization': 'Basic ' + PAYHERO_CONFIG.basicAuthToken },
+  });
+  if (!res.ok) throw new Error('Status check failed ' + res.status);
+  return res.json();
+}
+
+// ── Polling ───────────────────────────────────────────────────
+function startPolling(reference) {
+  let attempts = 0;
+  const MAX = 20;
+  pollTimer = setInterval(async () => {
+    attempts++;
+    document.getElementById('pmStatusText').textContent = `Waiting for confirmation... (${attempts}/${MAX})`;
+    try {
+      const data   = await checkStatus(reference);
+      const status = (data.status || '').toUpperCase();
+      if (status === 'SUCCESS') {
+        clearInterval(pollTimer);
+        const receipt = data.provider_reference || '';
+        document.getElementById('pmReceipt').textContent = receipt ? 'Receipt: ' + receipt : '';
+        showPmStep(3);
+        setTimeout(() => { closePayModal(); window.location.href = PAYHERO_CONFIG.redirectUrl; }, 2500);
+        return;
+      }
+      if (status === 'FAILED') {
+        clearInterval(pollTimer);
+        document.getElementById('pmFailedMsg').textContent = data.result_desc || 'Payment was declined or cancelled.';
+        showPmStep(4);
+        return;
+      }
+      if (attempts >= MAX) {
+        clearInterval(pollTimer);
+        document.getElementById('pmFailedMsg').textContent = 'No confirmation received in time. If you entered your PIN, please contact support.';
+        showPmStep(4);
+      }
+    } catch (err) {
+      console.error(err);
+      document.getElementById('pmStatusText').textContent = 'Network error — retrying...';
+    }
+  }, 3000);
+}
+
+// ── Button wiring ─────────────────────────────────────────────
+document.getElementById('pmSendBtn').addEventListener('click', async function () {
+  if (PAYHERO_CONFIG.basicAuthToken === 'YOUR_BASE64_BASIC_AUTH_TOKEN' || !PAYHERO_CONFIG.channelId) {
+    alert('Payment is not configured yet. Please set your PayHero credentials in the config block.');
+    return;
+  }
+  const phone = normalisePhone(document.getElementById('pmPhone').value.trim());
+  if (!phone) { alert('Invalid phone number. Enter 9 digits, e.g. 712345678'); return; }
+
+  this.disabled = true;
+  showPmStep(2);
+  document.getElementById('pmStatusText').textContent = 'Sending STK push request...';
+
+  try {
+    const data = await initiateSTK(phone, generateRef());
+    if (data.success === false) throw new Error(data.message || 'STK push failed');
+    startPolling(data.reference || generateRef());
+  } catch (err) {
+    document.getElementById('pmFailedMsg').textContent = err.message || 'Failed to initiate payment.';
+    showPmStep(4);
+    this.disabled = false;
+  }
+});
+
+document.getElementById('pmCancelBtn').addEventListener('click', closePayModal);
+document.getElementById('pmRetryBtn').addEventListener('click', () => { document.getElementById('pmSendBtn').disabled = false; showPmStep(1); });
+document.getElementById('pmPhone').addEventListener('input', function () { this.value = this.value.replace(/\D/g,'').slice(0,9); });
+document.getElementById('payModalOverlay').addEventListener('click', function(e){ if(e.target===this) closePayModal(); });
+
+// Open modal from CTA buttons
+document.getElementById('heroSignupBtn').addEventListener('click', openPayModal);
+document.getElementById('readySignupBtn').addEventListener('click', openPayModal);
+
+// ══════════════════════════════════════════════════════════════
+//  CURRENCY / EARNINGS DISPLAY
+// ══════════════════════════════════════════════════════════════
+const displayRates = {
+  KES:{symbol:"KES",rate:1}, NGN:{symbol:"₦",rate:11.54}, GHS:{symbol:"₵",rate:0.115},
+  UGX:{symbol:"UGX",rate:29.23}, TZS:{symbol:"TSh",rate:20.77}, ZAR:{symbol:"R",rate:0.146},
+  RWF:{symbol:"RF",rate:10}, XAF:{symbol:"FCFA",rate:4.77}, XOF:{symbol:"CFA",rate:4.77},
+  ZMW:{symbol:"ZMW",rate:0.208}, ETB:{symbol:"Br",rate:0.885}, GMD:{symbol:"D",rate:0.577},
+  MUR:{symbol:"Rs",rate:0.365}, EGP:{symbol:"E£",rate:0.31}, MAD:{symbol:"DH",rate:0.077},
+  USD:{symbol:"$",rate:0.0077}
+};
+const base = {
+  dailyMin:1000, dailyMax:4500, monthly:50000, surveyMin:50, surveyMax:500,
+  youtubeHour:300, tiktokMin:200, tiktokMax:1000, spinMax:5000, minWithdrawal:650,
+  weeklyMin:2000, weeklyMax:15000, monthlyEarn:50000, paidOut:285000000,
+  earner1:162000, earner2:215000, earner3:2450, earner4:5200
+};
+const countrySelect = document.getElementById('countrySelectInline');
+
+function conv(amtKES, c) {
+  const r = displayRates[c]?.rate || 1;
+  const v = c === 'USD' ? parseFloat((amtKES * 0.0077).toFixed(2)) : Math.round(amtKES * r);
+  if (v >= 1000000) return (v/1000000).toFixed(1)+'M';
+  return v.toLocaleString();
+}
+
+function updateAllCurrencies() {
+  const c   = countrySelect.value;
+  const sym = c !== 'USD' ? (displayRates[c]?.symbol || 'KES') : '$';
+  document.getElementById('chatterAmount').innerHTML  = `${sym} ${conv(base.dailyMin,c)} - ${conv(base.dailyMax,c)}`;
+  document.getElementById('monthlyEarning').innerHTML = `up to ${sym} ${conv(base.monthly,c)}+ in a month for beginners`;
+  document.querySelectorAll('.survey-amount').forEach(el => { el.innerHTML = `${sym} ${conv(base.surveyMin,c)} - ${conv(base.surveyMax,c)}`; });
+  document.querySelectorAll('.youtube-amount').forEach(el => { el.innerHTML = `${sym} ${conv(base.youtubeHour,c)}`; });
+  document.querySelectorAll('.tiktok-amount').forEach(el => { el.innerHTML = `${sym} ${conv(base.tiktokMin,c)} - ${conv(base.tiktokMax,c)}`; });
+  document.querySelectorAll('.spin-amount').forEach(el => { el.innerHTML = `${sym} ${conv(base.spinMax,c)}`; });
+  const mw = conv(base.minWithdrawal,c);
+  document.getElementById('minWithdrawal') && (document.getElementById('minWithdrawal').innerHTML = `${sym} ${mw}`);
+  document.getElementById('withdrawalMin') && (document.getElementById('withdrawalMin').innerHTML = `${sym} ${mw}`);
+  document.getElementById('weeklyEarn')    && (document.getElementById('weeklyEarn').innerHTML    = `${sym} ${conv(base.weeklyMin,c)} – ${conv(base.weeklyMax,c)}+`);
+  document.getElementById('monthlyEarn')  && (document.getElementById('monthlyEarn').innerHTML   = `${sym} ${conv(base.monthlyEarn,c)}`);
+  document.getElementById('paidOutAmount')&& (document.getElementById('paidOutAmount').innerHTML = `${sym} ${conv(base.paidOut,c)}+`);
+  renderEarners(c, sym);
+}
+countrySelect.addEventListener('change', updateAllCurrencies);
+
+// ── Top earners ───────────────────────────────────────────────
+const earners = [
+  {init:"KO", name:"Kelvin O.", flag:"🇰🇪", amtBase:162000, quote:"Cleared rent in 9 days!"},
+  {init:"AN", name:"Amaka N.",  flag:"🇳🇬", amtBase:215000, quote:"Best side hustle ever!"},
+  {init:"KB", name:"Kwame B.",  flag:"🇬🇭", amtBase:2450,   quote:"Withdrawal in seconds!"},
+  {init:"SD", name:"Sipho D.",  flag:"🇿🇦", amtBase:5200,   quote:"AllTasksPro pays better!"},
+];
+function renderEarners(c, sym) {
+  const grid = document.getElementById('earnersGrid');
+  if (!grid) return;
+  grid.innerHTML = earners.map(e => `
+    <div class="earner-card">
+      <div style="background:#1E3A5F;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;flex-shrink:0;">${e.init}</div>
+      <div>
+        <h4>${e.flag} ${e.name}</h4>
+        <div style="color:#C23B22;font-weight:800;">💰 ${sym} ${conv(e.amtBase,c)}</div>
+        <div style="font-size:9px;">"${e.quote}"</div>
+      </div>
+    </div>`).join('');
+}
+
+updateAllCurrencies();
+
+// ── Online counter ────────────────────────────────────────────
+let onlineCount = 4123;
+setInterval(() => {
+  const change = Math.floor(Math.random() * 15) - 3;
+  onlineCount = Math.min(6200, Math.max(3200, onlineCount + change));
+  document.getElementById('onlineCount').textContent = onlineCount.toLocaleString();
+  const t = document.getElementById('trendIcon');
+  if (change > 0)      t.innerHTML = `<i class="fas fa-arrow-up"></i> +${change}`;
+  else if (change < 0) t.innerHTML = `<i class="fas fa-arrow-down"></i> ${change}`;
+  else                 t.innerHTML = `<i class="fas fa-minus"></i> 0`;
+}, 14000);
+
+// ── FAQ accordion ─────────────────────────────────────────────
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-question').addEventListener('click', () => item.classList.toggle('open'));
+});
+
+// ── Withdrawal feed ───────────────────────────────────────────
+const uniqueNames = ["Kelvin Ochieng","Amaka Nwosu","Kwame Asante","Fatma Hassan","Sarah Namutebi","Thabo Mbeki","Fidele Uwimana","Paul Eboue","Aisha Diallo","James Mwangi","Mary Wanjiku","John Otieno","Grace Achieng","Peter Okoth","Lucy Njeri","Joseph Kamau","Esther Wambui","David Maina","Rebecca Chepkirui","Michael Kiprono","Catherine Muthoni","Daniel Njoroge","Phyllis Wangari","Samuel Kariuki","Monica Atieno","George Odhiambo","Veronica Akinyi","Patrick Omondi","Teresa Wairimu","Augustine Githinji","Florence Auma","Bernard Ouma","Josephine Wanjiru","Lawrence Onyango","Irene Ndanu","Fredrick Omondi","Beatrice Awino","Moses Otieno","Eunice Akoth","Stephen Owino","Mildred Adhiambo","Zachary Ochieng","Mercy Chebet","Vincent Kipchoge","Jemimah Wairimu","Albert Kimathi","Rosemary Nduta","Joseph Kuria","Lillian Wangeci","Peter Mungai"];
+const countryFlags = {Kenya:"🇰🇪",Nigeria:"🇳🇬",Ghana:"🇬🇭",Tanzania:"🇹🇿",Uganda:"🇺🇬",SA:"🇿🇦",Rwanda:"🇷🇼",Cameroon:"🇨🇲",Senegal:"🇸🇳",Zambia:"🇿🇲",Ethiopia:"🇪🇹"};
+const timeTags = ["Just now","15 sec ago","30 sec ago","1 min ago","2 mins ago","3 mins ago","5 mins ago","8 mins ago","10 mins ago"];
+let recentNames = [];
+
+function randEl(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
+
+function getCountry(name) {
+  const kenyan = ["Kelvin","James","Mary","John","Peter","Lucy","Joseph","Esther","David","Grace","Rebecca","Michael","Catherine","Daniel","Phyllis","Samuel","Monica","George","Veronica","Patrick","Teresa","Augustine","Florence","Bernard","Josephine","Lawrence","Irene","Fredrick","Beatrice","Moses","Eunice","Stephen","Mildred","Zachary","Mercy","Vincent","Jemimah","Albert","Rosemary","Lillian"];
+  if (kenyan.some(k => name.includes(k))) return "Kenya";
+  if (name.includes("Amaka")||name.includes("Nwosu")) return "Nigeria";
+  if (name.includes("Kwame")||name.includes("Asante")) return "Ghana";
+  if (name.includes("Fatma")||name.includes("Hassan")) return "Tanzania";
+  if (name.includes("Sarah")||name.includes("Namutebi")) return "Uganda";
+  if (name.includes("Thabo")||name.includes("Mbeki")) return "SA";
+  if (name.includes("Fidele")||name.includes("Uwimana")) return "Rwanda";
+  if (name.includes("Paul")||name.includes("Eboue")) return "Cameroon";
+  if (name.includes("Aisha")||name.includes("Diallo")) return "Senegal";
+  return "Kenya";
+}
+
+function getMpesaAmount() {
+  const usd = Math.random()<0.1 ? Math.floor(Math.random()*700)+300 : Math.floor(Math.random()*55)+15;
+  return Math.round(usd * 130);
+}
+
+function getUniqueName() {
+  const avail = uniqueNames.filter(n => !recentNames.includes(n));
+  const chosen = randEl(avail.length ? avail : uniqueNames);
+  recentNames.unshift(chosen);
+  if (recentNames.length > 15) recentNames.pop();
+  return chosen;
+}
+
+function addWithdrawal() {
+  const feed = document.getElementById('withdrawalFeed');
+  if (!feed) return;
+  const name    = getUniqueName();
+  const first   = name.split(' ')[0];
+  const country = getCountry(name);
+  const flag    = countryFlags[country] || '🇰🇪';
+  const amount  = getMpesaAmount();
+  const item    = document.createElement('div');
+  item.className = 'feed-item';
+  item.innerHTML = `<i class="fas fa-money-bill-wave" style="color:#1E3A5F"></i> ${flag} ${first} from ${country} withdrew KES ${amount.toLocaleString()} via M-Pesa <span class="time-tag">⏱️ ${randEl(timeTags)}</span>`;
+  feed.insertBefore(item, feed.firstChild);
+  if (feed.children.length > 20) feed.removeChild(feed.lastChild);
+  document.getElementById('withdrawalCount').textContent = feed.children.length;
+}
+
+document.getElementById('withdrawalBtn').addEventListener('click', () => {
+  document.getElementById('withdrawalFeed').classList.toggle('show');
+});
+
+for (let i = 0; i < 10; i++) addWithdrawal();
+setInterval(addWithdrawal, 8000);
+setInterval(addWithdrawal, 15000);
+setInterval(addWithdrawal, 22000);
+</script>
+</body>
+</html>

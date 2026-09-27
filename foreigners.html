@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>AllTasksPro - Live Foreigners Online</title>
+  <meta name="description" content="Connect with live foreigners. They pay to connect with you. Money goes to your wallet. One-time activation unlocks unlimited access.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #F2F2F2; color: #1E293B; font-size: 13px; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; background: #1E3A5F; color: white; padding: 10px 20px; border-radius: 40px; text-decoration: none; font-weight: 600; margin-bottom: 20px; transition: 0.2s; }
+    .back-btn:hover { background: #C23B22; transform: translateX(-3px); }
+
+    .chatter-card { background: linear-gradient(135deg, #059669, #047857); border-radius: 24px; padding: 24px 28px; margin-bottom: 30px; color: white; position: relative; box-shadow: 0 10px 25px rgba(5,150,105,0.3); }
+    .chatter-card::after { content: ""; position: absolute; bottom: 12px; left: 28px; right: 28px; height: 2px; background: repeating-linear-gradient(90deg,rgba(255,255,255,0.5),rgba(255,255,255,0.5) 10px,transparent 10px,transparent 20px); }
+    .chatter-title { font-size: 12px; font-weight: 500; opacity: 0.9; margin-bottom: 8px; }
+    .chatter-amount { font-size: 26px; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.5px; }
+    .chatter-daily { font-size: 11px; font-weight: 500; opacity: 0.85; margin-bottom: 4px; }
+    .chatter-monthly { font-size: 10px; font-weight: 400; opacity: 0.75; margin-bottom: 16px; }
+    .chatter-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+    .chatter-note { font-size: 11px; font-weight: 500; opacity: 0.8; display: flex; align-items: center; gap: 5px; }
+    .country-selector-inline { background: rgba(255,255,255,0.15); border-radius: 50px; padding: 5px 14px; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(4px); font-size: 11px; }
+    .country-selector-inline label { font-weight: 500; display: flex; align-items: center; gap: 4px; }
+    .country-selector-inline select { background: white; border: none; padding: 5px 10px; border-radius: 40px; font-size: 11px; font-weight: 600; color: #047857; cursor: pointer; font-family: 'Inter', sans-serif; }
+
+    .features-highlight { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 16px; margin: 30px 0; }
+    .feature-card { background: white; padding: 16px; border-radius: 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #E2E8F0; transition: all 0.2s; }
+    .feature-card:hover { transform: translateY(-3px); border-color: #C23B22; }
+    .feature-icon { width: 48px; height: 48px; background: linear-gradient(135deg,#1E3A5F,#C23B22); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: white; font-size: 22px; }
+    .feature-card h4 { font-size: 14px; font-weight: 800; margin-bottom: 6px; color: #1E3A5F; }
+    .feature-card p { font-size: 11px; color: #475569; }
+
+    .activation-notice { background: linear-gradient(135deg,#1E3A5F,#C23B22); border-radius: 24px; padding: 28px 24px; margin: 30px 0; color: white; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .activation-notice h2 { font-size: 1.6rem; margin-bottom: 8px; font-weight: 800; }
+    .activation-notice p { font-size: 14px; margin-bottom: 16px; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .unlock-badge { background: rgba(255,255,255,0.15); border-radius: 60px; padding: 12px 24px; display: inline-block; margin: 16px auto; }
+    .unlock-badge .fee-amount { font-size: 24px; font-weight: 800; letter-spacing: 1px; }
+    .activate-btn { background: white; color: #C23B22; padding: 14px 40px; border-radius: 60px; font-weight: 800; font-size: 16px; display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; transition: 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.15); cursor: pointer; border: none; }
+    .activate-btn:hover { transform: scale(1.03); background: #10B981; color: white; }
+    .refund-note { font-size: 11px; margin-top: 16px; opacity: 0.8; }
+
+    .foreigners-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 12px; margin: 20px 0; }
+    .foreigner-card { display: flex; align-items: center; justify-content: space-between; background: #FEFAF8; padding: 10px 14px; border-radius: 18px; border: 1px solid #FFE2D4; animation: fadeInScale 0.3s ease; transition: all 0.2s; }
+    .foreigner-card:hover { background: #FFF5F0; transform: translateY(-2px); }
+    @keyframes fadeInScale { from { opacity:0;transform:scale(0.95); } to { opacity:1;transform:scale(1); } }
+    .foreigner-info { display: flex; align-items: center; gap: 10px; cursor: pointer; flex: 1; }
+    .foreigner-avatar { width: 42px; height: 42px; border-radius: 50%; background-size: cover; background-position: center; position: relative; background-color: #E2E8F0; flex-shrink: 0; }
+    .online-status-badge { position: absolute; bottom: 2px; right: 2px; width: 9px; height: 9px; background: #10B981; border-radius: 50%; border: 2px solid white; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+    .foreigner-name { font-weight: 800; font-size: 12px; }
+    .status-text { font-size: 9px; font-weight: 600; margin-top: 3px; color: #10B981; }
+    .btn-start-chat { background: linear-gradient(135deg,#1E3A5F,#C23B22); color: white; padding: 5px 12px; border-radius: 40px; font-size: 10px; font-weight: 700; border: none; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+    .btn-start-chat:hover { transform: scale(1.02); background: #10B981; }
+    .refresh-indicator { font-size: 10px; color: #64748B; margin-top: 12px; text-align: center; }
+
+    /* Chat popup */
+    .popup-overlay { display: none; position: fixed; top:0;left:0;width:100%;height:100%; background: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: center; }
+    .popup-overlay.active { display: flex; }
+    .popup-card { background: white; width: 90%; max-width: 500px; border-radius: 28px; overflow-y: auto; max-height: 90vh; animation: popupSlideIn 0.3s ease; box-shadow: 0 25px 50px rgba(0,0,0,0.4); margin: 2% 0; }
+    @keyframes popupSlideIn { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+    .popup-header { background: linear-gradient(135deg,#1E3A5F,#C23B22); padding: 18px; color: white; text-align: center; }
+    .popup-header i { font-size: 38px; margin-bottom: 8px; display: block; }
+    .popup-header h3 { font-size: 1.2rem; font-weight: 800; }
+    .popup-foreigner-name { font-size: 0.85rem; opacity: 0.95; margin-top: 5px; font-weight: 600; }
+    .popup-body { padding: 18px; }
+    .popup-body p { color: #475569; margin-bottom: 10px; font-size: 11px; line-height: 1.4; }
+    .payment-detail-box { background: linear-gradient(135deg,#F0FDF4,#DCFCE7); padding: 14px; border-radius: 18px; margin: 12px 0; text-align: center; border: 1px solid #86EFAC; }
+    .payment-amount { font-size: 26px; font-weight: 800; color: #059669; }
+    .payment-time { font-size: 11px; color: #166534; margin-top: 4px; font-weight: 600; }
+    .currency-converter-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+    .converter-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(5,150,105,0.15); padding: 5px 12px; border-radius: 40px; font-size: 10px; color: #047857; cursor: pointer; transition: 0.2s; border: 1px solid rgba(5,150,105,0.4); font-weight: 600; }
+    .converter-badge:hover { background: rgba(5,150,105,0.25); transform: scale(1.02); }
+    .converter-note { font-size: 9px; color: #64748B; margin-top: 6px; font-style: italic; }
+    .info-box { background: #FEFAF8; padding: 12px; border-radius: 16px; margin: 12px 0; border: 1px solid #FFE2D4; }
+    .info-box h4 { color: #1E3A5F; font-size: 12px; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .info-box ul { list-style: none; }
+    .info-box li { font-size: 10px; color: #334155; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .info-box li i { color: #10B981; width: 14px; font-size: 10px; }
+    .active-account-note { background: #FFF8E7; padding: 10px; border-radius: 14px; margin: 12px 0; text-align: center; font-size: 10px; border-left: 4px solid #F59E0B; font-weight: 500; }
+    .active-account-note i { color: #F59E0B; margin-right: 6px; font-size: 12px; }
+    .waiting-badge { background: #FFF0EB; padding: 10px; border-radius: 14px; margin: 12px 0; text-align: center; font-size: 10px; border-left: 4px solid #C23B22; font-weight: 500; }
+    .earning-tip { background: #EFF6FF; padding: 8px; border-radius: 12px; margin: 10px 0; text-align: center; font-size: 10px; color: #1E3A5F; }
+    .popup-buttons { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+    .popup-btn { flex: 1; padding: 12px; border-radius: 50px; font-weight: 800; font-size: 13px; transition: 0.2s; text-align: center; cursor: pointer; border: none; }
+    .popup-btn-primary { background: linear-gradient(135deg,#1E3A5F,#C23B22); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .popup-btn-primary:hover { transform: scale(1.02); }
+    .popup-btn-secondary { background: #F1F5F9; color: #1E3A5F; border: 1px solid #E2E8F0; }
+    .popup-btn-secondary:hover { background: #E2E8F0; }
+    .testimonial { background: white; border-radius: 16px; padding: 14px; margin: 20px 0; text-align: center; font-style: italic; font-size: 12px; color: #475569; border-left: 4px solid #C23B22; }
+
+    /* PayHero payment modal */
+    .pay-modal-overlay { display: none; position: fixed; top:0;left:0;width:100%;height:100%; background: rgba(0,0,0,0.88); z-index: 2000; justify-content: center; align-items: center; }
+    .pay-modal-overlay.active { display: flex; }
+    .pay-modal-card { background: white; width: 90%; max-width: 420px; border-radius: 28px; overflow: hidden; animation: popupSlideIn 0.3s ease; box-shadow: 0 25px 50px rgba(0,0,0,0.4); }
+    .pay-modal-header { background: linear-gradient(135deg,#667eea,#764ba2); padding: 20px; color: white; text-align: center; }
+    .pay-modal-header i { font-size: 2rem; margin-bottom: 8px; display: block; }
+    .pay-modal-header h3 { font-size: 1.1rem; font-weight: 800; }
+    .pay-modal-body { padding: 20px; }
+    .pay-modal-body label { font-weight: 700; font-size: 12px; display: block; margin-bottom: 6px; }
+    .phone-row { display: flex; border: 1px solid #CBD5E1; border-radius: 12px; overflow: hidden; margin-bottom: 6px; }
+    .phone-prefix { background: #F8FAFC; padding: 10px 12px; font-weight: 700; font-size: 13px; border-right: 1px solid #CBD5E1; display: flex; align-items: center; }
+    .phone-row input { flex: 1; border: none; outline: none; padding: 10px 12px; font-size: 13px; font-family: 'Inter',sans-serif; }
+    .btn-pay { width: 100%; background: linear-gradient(135deg,#11998e,#38ef7d); color: white; border: none; border-radius: 12px; padding: 12px; font-size: 14px; font-weight: 800; cursor: pointer; margin-top: 10px; transition: 0.2s; }
+    .btn-pay:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+    .btn-pay:disabled { opacity: 0.6; transform: none; cursor: not-allowed; }
+    .btn-cancel-pay { width: 100%; background: #F1F5F9; color: #475569; border: none; border-radius: 12px; padding: 10px; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 8px; transition: 0.2s; }
+    .btn-cancel-pay:hover { background: #E2E8F0; }
+
+    /* progress bar */
+    .pm-progress { height: 6px; background: #E2E8F0; border-radius: 10px; overflow: hidden; margin: 12px 0; }
+    .pm-bar { height: 100%; background: linear-gradient(90deg,#667eea,#764ba2); border-radius: 10px; animation: barSlide 2s linear infinite; }
+    @keyframes barSlide { 0%{width:20%;margin-left:0} 50%{width:60%;margin-left:20%} 100%{width:20%;margin-left:80%} }
+    .pm-status { font-size: 11px; color: #64748B; text-align: center; margin-bottom: 8px; }
+
+    @media (max-width: 768px) {
+      .foreigners-grid { grid-template-columns: 1fr; }
+      .chatter-card { padding: 18px; }
+      .chatter-amount { font-size: 22px; }
+      .chatter-footer { flex-direction: column; align-items: flex-start; }
+      .activation-notice h2 { font-size: 1.3rem; }
+      .popup-buttons { flex-direction: column; }
+      .foreigner-card { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <a href="onboard.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+  <!-- EARNINGS CARD -->
+  <div class="chatter-card">
+    <div class="chatter-title">💬 Typical chatters earn:</div>
+    <div class="chatter-amount" id="chatterAmount">KES 1,000 - 4,500</div>
+    <div class="chatter-daily">daily potential</div>
+    <div class="chatter-monthly" id="monthlyEarning">up to KES 50,000+ in a month for beginners</div>
+    <div class="chatter-footer">
+      <div class="chatter-note"><i class="fas fa-clock"></i> Activate once, earn forever</div>
+      <div class="country-selector-inline">
+        <label><i class="fas fa-map-marker-alt"></i> Country:</label>
+        <select id="countrySelectInline">
+          <option value="KES">🇰🇪 Kenya (KES)</option>
+          <option value="NGN">🇳🇬 Nigeria (₦)</option>
+          <option value="GHS">🇬🇭 Ghana (₵)</option>
+          <option value="UGX">🇺🇬 Uganda (UGX)</option>
+          <option value="TZS">🇹🇿 Tanzania (TSh)</option>
+          <option value="ZAR">🇿🇦 South Africa (R)</option>
+          <option value="RWF">🇷🇼 Rwanda (RF)</option>
+          <option value="ZMW">🇿🇲 Zambia (ZMW)</option>
+          <option value="ETB">🇪🇹 Ethiopia (Br)</option>
+          <option value="XAF">🇨🇲 Cameroon (FCFA)</option>
+          <option value="XOF">🇨🇮 Ivory Coast (CFA)</option>
+          <option value="GMD">🇬🇲 Gambia (D)</option>
+          <option value="USD">🌍 Other (USD)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIVE FOREIGNERS -->
+  <h2 style="color:#1E3A5F;">💬 Live Foreigners Online
+    <span style="font-size:12px;background:#10B98120;padding:2px 10px;border-radius:30px;margin-left:10px;">Active Now</span>
+  </h2>
+  <p style="color:#64748B;margin-bottom:10px;">✨ Click "Start Chat" to connect. Foreigners pay for your time.</p>
+  <div class="foreigners-grid" id="foreignersGrid"></div>
+  <div class="refresh-indicator">🔄 Real people waiting to connect with you</div>
+
+  <!-- FEATURES -->
+  <div class="features-highlight">
+    <div class="feature-card"><div class="feature-icon"><i class="fas fa-hand-holding-usd"></i></div><h4>Foreigners Pay to Connect</h4><p>They pay for your time and attention. You never ask for money — it's built into the platform.</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fas fa-wallet"></i></div><h4>Money to Your Wallet</h4><p>All payments go directly to your AllTasksPro account. Withdraw instantly to M-Pesa, MoMo, or bank.</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fas fa-globe"></i></div><h4>Global Members</h4><p>Chat with verified people from USA, UK, Canada, Europe and Australia.</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h4>Safe &amp; Verified</h4><p>100,000+ active African earners. 4.9★ TrustScore. 24/7 moderation.</p></div>
+  </div>
+
+  <!-- ACTIVATION NOTICE -->
+  <div class="activation-notice">
+    <h2><i class="fas fa-unlock-alt"></i> One Activation. Unlimited Access.</h2>
+    <p>Register once, pay a small one-time fee, and unlock access to <strong>ALL foreigners</strong> on the platform. No limits. No restrictions.</p>
+    <div class="unlock-badge">
+      <div class="fee-amount"><i class="fas fa-infinity"></i> One Small Fee • Unlimited Earnings</div>
+    </div>
+    <p><strong>👉 How it works:</strong> Foreigners pay to connect with you → Money goes to your AllTasksPro wallet → You withdraw instantly to M-Pesa.</p>
+    <button id="activateNowBtn" type="button" class="activate-btn"><i class="fas fa-rocket"></i> Register &amp; Activate Now →</button>
+    <div class="refund-note"><i class="fas fa-check-circle"></i> One-time • Lifetime access • Your wallet = your money</div>
+  </div>
+
+  <div class="testimonial">
+    <i class="fas fa-quote-left" style="color:#C23B22;margin-right:5px;"></i>
+    I was nervous at first, but the activation fee paid itself back in just 2 hours. Now foreigners pay to talk with me daily!
+    <strong>- Kelvin, Kenya 🇰🇪</strong>
+  </div>
+</div>
+
+<!-- ══════════════ CHAT POPUP (premium required) ══════════════ -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-card">
+    <div class="popup-header">
+      <i class="fas fa-hand-holding-usd"></i>
+      <h3>⚠️ Premium Required</h3>
+      <div class="popup-foreigner-name" id="popupForeignerName"></div>
+    </div>
+    <div class="popup-body">
+      <p>This foreigner will pay to connect with you. Here's how it works:</p>
+      <div class="payment-detail-box">
+        <div class="payment-amount" id="paymentAmount">$20 USD</div>
+        <div class="payment-time" id="paymentTime">for 30 minutes of chatting</div>
+        <div class="currency-converter-row">
+          <div class="converter-badge" id="converterBadge">
+            <i class="fas fa-exchange-alt"></i> <span id="converterText">Convert to my currency</span>
+          </div>
+        </div>
+        <div class="converter-note" id="converterNote"></div>
+      </div>
+      <div class="active-account-note">
+        <i class="fas fa-exclamation-triangle"></i> <strong>Upgrade to premium to access this chat</strong>
+      </div>
+      <div class="info-box">
+        <h4><i class="fas fa-gem"></i> Your Account = Your Wallet</h4>
+        <ul>
+          <li><i class="fas fa-wallet"></i> All payments go to your AllTasksPro account balance</li>
+          <li><i class="fas fa-money-bill-wave"></i> Withdraw instantly to M-Pesa, MoMo, or Bank</li>
+          <li><i class="fas fa-chart-line"></i> Track all your earnings in real-time</li>
+          <li><i class="fas fa-star"></i> No hidden fees, no monthly charges</li>
+        </ul>
+      </div>
+      <div class="earning-tip">
+        <i class="fas fa-rocket"></i> <strong>Pro Tip:</strong> Active chatters earn KES 3,000–15,000+ weekly. Foreigners pay to connect with you daily!
+      </div>
+      <div class="waiting-badge">
+        <i class="fas fa-hourglass-half"></i> <span id="waitingText">Someone is waiting to connect with you!</span>
+      </div>
+      <div class="popup-buttons">
+        <button class="popup-btn popup-btn-primary" id="payPremium">✨ Pay Premium (Ksh 499) ✨</button>
+        <button class="popup-btn popup-btn-secondary" id="closePopupBtn">Maybe Later</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PAYHERO PAYMENT MODAL ══════════════ -->
+<div class="pay-modal-overlay" id="payModalOverlay">
+  <div class="pay-modal-card">
+
+    <!-- Step 1: phone entry -->
+    <div id="pmStep1">
+      <div class="pay-modal-header">
+        <i class="fas fa-mobile-alt"></i>
+        <h3>Activate Account — KSh 499</h3>
+      </div>
+      <div class="pay-modal-body">
+        <label for="pmPhone">M-Pesa Phone Number</label>
+        <div class="phone-row">
+          <span class="phone-prefix">+254</span>
+          <input type="tel" id="pmPhone" placeholder="712345678" maxlength="9" inputmode="numeric">
+        </div>
+        <small style="color:#94A3B8;font-size:10px;display:block;margin-bottom:12px;">
+          <i class="fas fa-info-circle"></i> 9 digits, no leading 0 or country code
+        </small>
+        <button class="btn-pay" id="pmSendBtn"><i class="fas fa-phone-alt"></i> Send M-Pesa Prompt</button>
+        <button class="btn-cancel-pay" id="pmCancelBtn">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Step 2: processing -->
+    <div id="pmStep2" style="display:none;">
+      <div class="pay-modal-header">
+        <i class="fas fa-spinner fa-spin"></i>
+        <h3>Processing...</h3>
+      </div>
+      <div class="pay-modal-body" style="text-align:center;">
+        <div class="pm-progress"><div class="pm-bar"></div></div>
+        <p id="pmStatusText" class="pm-status">Sending STK push request...</p>
+        <small style="color:#94A3B8;">Check your phone and enter your M-Pesa PIN.</small>
+      </div>
+    </div>
+
+    <!-- Step 3: success -->
+    <div id="pmStep3" style="display:none;">
+      <div class="pay-modal-header" style="background:linear-gradient(135deg,#11998e,#38ef7d);">
+        <i class="fas fa-check-circle"></i>
+        <h3>Payment Confirmed! 🎉</h3>
+      </div>
+      <div class="pay-modal-body" style="text-align:center;">
+        <p style="color:#059669;font-weight:800;font-size:15px;margin-bottom:8px;">Your account is now activated!</p>
+        <p id="pmReceipt" style="font-size:11px;color:#64748B;margin-bottom:10px;"></p>
+        <small style="color:#94A3B8;">Redirecting you now...</small>
+      </div>
+    </div>
+
+    <!-- Step 4: failed -->
+    <div id="pmStep4" style="display:none;">
+      <div class="pay-modal-header" style="background:linear-gradient(135deg,#EF4444,#DC2626);">
+        <i class="fas fa-times-circle"></i>
+        <h3>Payment Failed</h3>
+      </div>
+      <div class="pay-modal-body" style="text-align:center;">
+        <p id="pmFailedMsg" style="color:#64748B;font-size:12px;margin-bottom:16px;"></p>
+        <button class="btn-pay" id="pmRetryBtn" style="max-width:200px;margin:0 auto;"><i class="fas fa-redo"></i> Try Again</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ SCRIPTS ══════════════ -->
+<script>
+// ─────────────────────────────────────────────────────────────
+//  PAYHERO CONFIG  — fill in your credentials
+// ─────────────────────────────────────────────────────────────
+const PAYHERO_CONFIG = {
+  basicAuthToken: 'dWNqc0o3MjBpNHpKQWViUEN3WWs6bml4eWc0cE1XdlBiemh6N2d3YUwwd0t3ZElyQ0l3TkxyNnZ5NjE5Qg==',
+  channelId:      6241,
+  amount:         499,
+  callbackUrl:    '',      // public URL for webhook (optional for polling)
+  redirectUrl:    'onboard.html',
+};
+// ─────────────────────────────────────────────────────────────
+
+const PAYHERO_BASE = 'https://backend.payhero.co.ke/api/v2';
+let pollTimer = null;
+
+// ── Phone helper ──────────────────────────────────────────────
+function normalisePhone(raw) {
+  const d = raw.replace(/\D/g, '');
+  if (/^(07|01)\d{8}$/.test(d))  return '254' + d.slice(1);
+  if (/^[71]\d{8}$/.test(d))     return '254' + d;
+  if (/^254[71]\d{8}$/.test(d))  return d;
+  return null;
+}
+
+function generateRef() {
+  return 'ATP-' + Date.now() + '-' + Math.random().toString(36).slice(2,8).toUpperCase();
+}
+
+// ── Modal step switcher ───────────────────────────────────────
+function showPmStep(n) {
+  [1,2,3,4].forEach(i => {
+    const el = document.getElementById('pmStep' + i);
+    if (el) el.style.display = (i === n) ? '' : 'none';
+  });
+}
+
+function openPayModal() {
+  showPmStep(1);
+  document.getElementById('pmPhone').value = '';
+  document.getElementById('payModalOverlay').classList.add('active');
+  setTimeout(() => document.getElementById('pmPhone').focus(), 200);
+}
+
+function closePayModal() {
+  clearInterval(pollTimer);
+  document.getElementById('payModalOverlay').classList.remove('active');
+}
+
+// ── PayHero calls ─────────────────────────────────────────────
+async function initiateSTK(phone, extRef) {
+  const res = await fetch(`${PAYHERO_BASE}/payments`, {
+    method: 'POST',
+    headers: {
+      'Content-Type':  'application/json',
+      'Authorization': 'Basic ' + PAYHERO_CONFIG.basicAuthToken,
+    },
+    body: JSON.stringify({
+      amount:             PAYHERO_CONFIG.amount,
+      phone_number:       phone,
+      channel_id:         PAYHERO_CONFIG.channelId,
+      provider:           'm-pesa',
+      external_reference: extRef,
+      customer_name:      'AllTasksPro User',
+      callback_url:       PAYHERO_CONFIG.callbackUrl,
+    }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || 'PayHero error ' + res.status);
+  }
+  return res.json();
+}
+
+async function checkStatus(reference) {
+  const res = await fetch(
+    `${PAYHERO_BASE}/transaction-status?reference=${encodeURIComponent(reference)}`,
+    { headers: { 'Authorization': 'Basic ' + PAYHERO_CONFIG.basicAuthToken } }
+  );
+  if (!res.ok) throw new Error('Status check failed ' + res.status);
+  return res.json();
+}
+
+// ── Polling ───────────────────────────────────────────────────
+function startPolling(reference) {
+  let attempts = 0;
+  const MAX = 20;
+
+  pollTimer = setInterval(async () => {
+    attempts++;
+    document.getElementById('pmStatusText').textContent =
+      `Waiting for confirmation... (${attempts}/${MAX})`;
+
+    try {
+      const data = await checkStatus(reference);
+      const status = (data.status || '').toUpperCase();
+
+      if (status === 'SUCCESS') {
+        clearInterval(pollTimer);
+        const receipt = data.provider_reference || '';
+        document.getElementById('pmReceipt').textContent =
+          receipt ? 'Receipt: ' + receipt : '';
+        showPmStep(3);
+        setTimeout(() => {
+          closePayModal();
+          window.location.href = PAYHERO_CONFIG.redirectUrl;
+        }, 2500);
+        return;
+      }
+
+      if (status === 'FAILED') {
+        clearInterval(pollTimer);
+        document.getElementById('pmFailedMsg').textContent =
+          data.result_desc || 'Payment was declined or cancelled.';
+        showPmStep(4);
+        return;
+      }
+
+      if (attempts >= MAX) {
+        clearInterval(pollTimer);
+        document.getElementById('pmFailedMsg').textContent =
+          'No confirmation received within the timeout. If you entered your PIN, please contact support.';
+        showPmStep(4);
+      }
+    } catch (err) {
+      console.error(err);
+      document.getElementById('pmStatusText').textContent = 'Network error — retrying...';
+    }
+  }, 3000);
+}
+
+// ── Send button ───────────────────────────────────────────────
+document.getElementById('pmSendBtn').addEventListener('click', async function () {
+  if (PAYHERO_CONFIG.basicAuthToken === 'YOUR_BASE64_BASIC_AUTH_TOKEN' || !PAYHERO_CONFIG.channelId) {
+    alert('Payment is not configured yet. Please set up your PayHero credentials.');
+    return;
+  }
+
+  const raw   = document.getElementById('pmPhone').value.trim();
+  const phone = normalisePhone(raw);
+  if (!phone) {
+    alert('Invalid phone number. Enter 9 digits, e.g. 712345678');
+    return;
+  }
+
+  this.disabled = true;
+  showPmStep(2);
+  document.getElementById('pmStatusText').textContent = 'Sending STK push request...';
+
+  const extRef = generateRef();
+  try {
+    const data = await initiateSTK(phone, extRef);
+    if (data.success === false) throw new Error(data.message || 'STK push failed');
+
+    const ref = data.reference || extRef;
+    document.getElementById('pmStatusText').textContent =
+      'M-Pesa prompt sent — enter your PIN.';
+    startPolling(ref);
+  } catch (err) {
+    document.getElementById('pmFailedMsg').textContent = err.message || 'Failed to initiate payment.';
+    showPmStep(4);
+    this.disabled = false;
+  }
+});
+
+document.getElementById('pmCancelBtn').addEventListener('click', closePayModal);
+
+document.getElementById('pmRetryBtn').addEventListener('click', function () {
+  document.getElementById('pmSendBtn').disabled = false;
+  showPmStep(1);
+});
+
+// digits only in phone field
+document.getElementById('pmPhone').addEventListener('input', function () {
+  this.value = this.value.replace(/\D/g, '').slice(0, 9);
+});
+
+// ══════════════════════════════════════════════════════════════
+//  FOREIGNERS GRID
+// ══════════════════════════════════════════════════════════════
+const femaleFirstNames = ["Margaret","Dorothy","Betty","Helen","Patricia","Ruth","Barbara","Nancy","Carol","Susan","Janet","Donna","Shirley","Judith","Pamela","Kathleen","Deborah","Brenda","Virginia","Joyce","Marilyn","Frances","Martha","Joan","Alice","Phyllis","Doris","Lois","Ann","Rose","Eleanor","Clara","Ethel","Gladys","Edna","Mildred","Irene","Pauline","Josephine","Beatrice","Florence","Gertrude","Marjorie","Thelma","Lucille","Bernice","Lorraine","Audrey","Evelyn","Vivian"];
+const maleFirstNames   = ["James","Robert","John","William","Richard","Charles","Donald","George","Kenneth","Paul","Edward","Ronald","Steven","Larry","Dennis","Gary","Frank","Raymond","Roger","Jerry","Walter","Harold","Carl","Arthur","Henry","Lawrence","Wayne","Philip","Douglas","Alan","Bernard","Eugene","Russell","Clarence","Stanley","Albert","Fred","Howard","Ralph","Louis","Norman","Leonard","Theodore","Clifford","Melvin","Edwin","Marvin","Lloyd","Milton","Clyde"];
+const lastNames        = ["Smith","Johnson","Williams","Brown","Jones","Garcia","Miller","Davis","Rodriguez","Martinez","Hernandez","Lopez","Gonzalez","Wilson","Anderson","Thomas","Taylor","Moore","Jackson","Martin","Lee","Perez","Thompson","White","Harris","Sanchez","Clark","Ramirez","Lewis","Robinson","Walker","Young","Allen","King","Wright","Scott","Torres","Nguyen","Hill","Flores","Green","Adams","Nelson","Baker","Hall","Rivera","Campbell","Mitchell","Carter","Roberts"];
+const countryList      = [{name:"USA",flag:"🇺🇸"},{name:"United Kingdom",flag:"🇬🇧"},{name:"Canada",flag:"🇨🇦"},{name:"Germany",flag:"🇩🇪"},{name:"France",flag:"🇫🇷"},{name:"Italy",flag:"🇮🇹"},{name:"Spain",flag:"🇪🇸"},{name:"Netherlands",flag:"🇳🇱"},{name:"Sweden",flag:"🇸🇪"},{name:"Ireland",flag:"🇮🇪"},{name:"Australia",flag:"🇦🇺"},{name:"Norway",flag:"🇳🇴"},{name:"Denmark",flag:"🇩🇰"},{name:"Finland",flag:"🇫🇮"},{name:"Belgium",flag:"🇧🇪"},{name:"Switzerland",flag:"🇨🇭"},{name:"Austria",flag:"🇦🇹"},{name:"Portugal",flag:"🇵🇹"},{name:"Greece",flag:"🇬🇷"},{name:"New Zealand",flag:"🇳🇿"}];
+const femaleAvatars    = ["https://randomuser.me/api/portraits/women/68.jpg","https://randomuser.me/api/portraits/women/75.jpg","https://randomuser.me/api/portraits/women/80.jpg","https://randomuser.me/api/portraits/women/88.jpg","https://randomuser.me/api/portraits/women/90.jpg","https://randomuser.me/api/portraits/women/65.jpg","https://randomuser.me/api/portraits/women/70.jpg","https://randomuser.me/api/portraits/women/72.jpg","https://randomuser.me/api/portraits/women/95.jpg","https://randomuser.me/api/portraits/women/82.jpg","https://randomuser.me/api/portraits/women/78.jpg","https://randomuser.me/api/portraits/women/85.jpg","https://randomuser.me/api/portraits/women/63.jpg","https://randomuser.me/api/portraits/women/92.jpg","https://randomuser.me/api/portraits/women/60.jpg","https://randomuser.me/api/portraits/women/94.jpg","https://randomuser.me/api/portraits/women/77.jpg","https://randomuser.me/api/portraits/women/87.jpg"];
+const maleAvatars      = ["https://randomuser.me/api/portraits/men/68.jpg","https://randomuser.me/api/portraits/men/72.jpg","https://randomuser.me/api/portraits/men/75.jpg","https://randomuser.me/api/portraits/men/79.jpg","https://randomuser.me/api/portraits/men/83.jpg","https://randomuser.me/api/portraits/men/85.jpg","https://randomuser.me/api/portraits/men/91.jpg","https://randomuser.me/api/portraits/men/65.jpg","https://randomuser.me/api/portraits/men/71.jpg","https://randomuser.me/api/portraits/men/80.jpg","https://randomuser.me/api/portraits/men/88.jpg","https://randomuser.me/api/portraits/men/93.jpg","https://randomuser.me/api/portraits/men/67.jpg","https://randomuser.me/api/portraits/men/77.jpg","https://randomuser.me/api/portraits/men/62.jpg","https://randomuser.me/api/portraits/men/89.jpg","https://randomuser.me/api/portraits/men/95.jpg","https://randomuser.me/api/portraits/men/98.jpg"];
+const paymentOptions   = [{usd:100,minutes:30},{usd:150,minutes:30},{usd:200,minutes:30},{usd:250,minutes:45},{usd:300,minutes:60},{usd:250,minutes:60},{usd:240,minutes:90},{usd:145,minutes:90},{usd:350,minutes:120},{usd:160,minutes:120},{usd:155,minutes:110},{usd:465,minutes:130}];
+const currencyRates    = {KES:{symbol:"KES",rate:130},NGN:{symbol:"₦",rate:1500},GHS:{symbol:"₵",rate:15},UGX:{symbol:"UGX",rate:3800},TZS:{symbol:"TSh",rate:2700},ZAR:{symbol:"R",rate:19},RWF:{symbol:"RF",rate:1300},ZMW:{symbol:"ZMW",rate:27},ETB:{symbol:"Br",rate:115},XAF:{symbol:"FCFA",rate:620},XOF:{symbol:"CFA",rate:620},GMD:{symbol:"D",rate:75},USD:{symbol:"$",rate:1}};
+
+const countrySelect = document.getElementById('countrySelectInline');
+
+function updateEarnings() {
+  const c = countrySelect.value;
+  const d = currencyRates[c];
+  if (d && c !== 'USD') {
+    const min = Math.round(4000 * d.rate / 130);
+    const max = Math.round(5500 * d.rate / 130);
+    document.getElementById('chatterAmount').innerHTML = `${d.symbol} ${min.toLocaleString()} - ${max.toLocaleString()}`;
+    const mo = Math.round(60000 * d.rate / 130);
+    document.getElementById('monthlyEarning').innerHTML = `up to ${d.symbol} ${mo.toLocaleString()}+ in a month for beginners`;
+  } else {
+    document.getElementById('chatterAmount').innerHTML = `$7.70 - $34.60`;
+    document.getElementById('monthlyEarning').innerHTML = `up to $384+ in a month for beginners`;
+  }
+}
+countrySelect.addEventListener('change', updateEarnings);
+updateEarnings();
+
+let usedAvatars = [], currentForeigners = [];
+
+function getAvatar(gender) {
+  const pool = gender === 'female' ? [...femaleAvatars] : [...maleAvatars];
+  const avail = pool.filter(a => !usedAvatars.includes(a));
+  const chosen = avail.length ? avail[Math.floor(Math.random() * avail.length)] : pool[Math.floor(Math.random() * pool.length)];
+  usedAvatars.push(chosen);
+  if (usedAvatars.length > pool.length * 2) usedAvatars = [];
+  return chosen;
+}
+
+function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+function genForeigner(id) {
+  const gender    = Math.random() > 0.48 ? 'female' : 'male';
+  const firstName = gender === 'female' ? rand(femaleFirstNames) : rand(maleFirstNames);
+  const lastName  = rand(lastNames);
+  const country   = rand(countryList);
+  const payment   = rand(paymentOptions);
+  return { id, fullName: `${firstName} ${lastName}`, displayName: `${firstName} ${lastName[0]}.`, flag: country.flag, avatar: getAvatar(gender), payment };
+}
+
+function formatMinutes(m) {
+  if (m >= 60) { const h = Math.floor(m/60), r = m%60; return r ? `${h}h ${r}m` : `${h} hour${h>1?'s':''}`; }
+  return `${m} min${m>1?'s':''}`;
+}
+
+function renderForeigners() {
+  const grid = document.getElementById('foreignersGrid');
+  grid.innerHTML = currentForeigners.map(f => `
+    <div class="foreigner-card">
+      <div class="foreigner-info" onclick="openChatPopup(${f.id})">
+        <div class="foreigner-avatar" style="background-image:url('${f.avatar}')">
+          <div class="online-status-badge"></div>
+        </div>
+        <div>
+          <div class="foreigner-name">${f.flag} ${f.displayName}</div>
+          <div class="status-text"><i class="fas fa-circle" style="font-size:6px;"></i> Active now</div>
+        </div>
+      </div>
+      <div class="action-buttons">
+        <button class="btn-start-chat" onclick="openChatPopup(${f.id})"><i class="fas fa-comment"></i> Start Chat</button>
+      </div>
+    </div>`).join('');
+}
+
+function refreshForeigners() {
+  usedAvatars = [];
+  currentForeigners = Array.from({length:16}, (_, i) => genForeigner(i));
+  renderForeigners();
+}
+
+refreshForeigners();
+setInterval(refreshForeigners, 20000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshForeigners(); });
+
+// ── Chat popup ────────────────────────────────────────────────
+let currentPayment = null, showConverted = false;
+
+window.openChatPopup = function(id) {
+  const f = currentForeigners.find(x => x.id === id);
+  if (!f) return;
+  currentPayment  = f.payment;
+  showConverted   = false;
+  const c = countrySelect.value;
+  const sym = currencyRates[c]?.symbol || '$';
+
+  document.getElementById('popupForeignerName').textContent = `${f.flag} ${f.fullName}`;
+  document.getElementById('paymentAmount').textContent      = `$${f.payment.usd} USD`;
+  document.getElementById('paymentTime').textContent        = `for ${formatMinutes(f.payment.minutes)} of chatting`;
+  document.getElementById('waitingText').textContent        = `${f.flag} ${f.fullName} is waiting to connect with you right now!`;
+  document.getElementById('converterText').textContent      = `Convert to ${sym}`;
+  document.getElementById('converterNote').textContent      = '';
+  document.getElementById('popupOverlay').classList.add('active');
+};
+
+document.getElementById('converterBadge').addEventListener('click', function () {
+  showConverted = !showConverted;
+  const c   = countrySelect.value;
+  const d   = currencyRates[c];
+  const sym = d?.symbol || '$';
+  if (showConverted && c !== 'USD') {
+    const local = Math.round(currentPayment.usd * d.rate);
+    document.getElementById('paymentAmount').textContent  = `${sym} ${local.toLocaleString()}`;
+    document.getElementById('converterText').textContent  = 'Show in USD';
+    document.getElementById('converterNote').textContent  = `$${currentPayment.usd} USD ≈ ${sym} ${local.toLocaleString()}`;
+  } else {
+    document.getElementById('paymentAmount').textContent  = `$${currentPayment.usd} USD`;
+    document.getElementById('converterText').textContent  = `Convert to ${sym}`;
+    document.getElementById('converterNote').textContent  = '';
+  }
+});
+
+function closePopup() { document.getElementById('popupOverlay').classList.remove('active'); }
+document.getElementById('closePopupBtn').addEventListener('click', closePopup);
+document.getElementById('popupOverlay').addEventListener('click', e => { if (e.target === document.getElementById('popupOverlay')) closePopup(); });
+
+// "Pay Premium" button in the chat popup opens the PayHero modal
+document.getElementById('payPremium').addEventListener('click', function () {
+  closePopup();
+  openPayModal();
+});
+
+// Activate now button
+document.getElementById('activateNowBtn').addEventListener('click', openPayModal);
+
+// close pay modal on outside click
+document.getElementById('payModalOverlay').addEventListener('click', function (e) {
+  if (e.target === this) closePayModal();
+});
+</script>
+</body>
+</html>

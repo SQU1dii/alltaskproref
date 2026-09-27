@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activate Account - KSh 500</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container { padding-top: 3rem; padding-bottom: 3rem; }
+        .card {
+            border-radius: 20px;
+            border: none;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeIn 0.6s ease-out;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1.5rem;
+        }
+        .card-header h3 { font-weight: 700; letter-spacing: -0.5px; }
+        .card-body { padding: 2rem; }
+        .amount-display {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        .alert { border-radius: 15px; border: none; }
+        .alert-info {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #155724;
+            border-left: 4px solid #0c5460;
+        }
+        .alert-warning {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            border-left: 4px solid #d63031;
+        }
+        .input-group-text {
+            background: #f8f9fa;
+            border-radius: 12px 0 0 12px;
+            font-weight: 600;
+        }
+        .form-control {
+            border-radius: 0 12px 12px 0;
+            padding: 0.75rem;
+        }
+        .form-control:focus {
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            border-color: #667eea;
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            padding: 0.75rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .btn-success:active { transform: translateY(0); }
+        .btn-success:disabled { opacity: 0.7; transform: none; }
+        hr {
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            height: 2px;
+            opacity: 0.3;
+        }
+        .modal-content { border-radius: 20px; border: none; }
+        .progress { height: 8px; border-radius: 10px; background: #e0e0e0; }
+        .progress-bar {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            .card-body { padding: 1.5rem; }
+            .amount-display { font-size: 2.5rem; }
+            .container { padding-left: 1rem; padding-right: 1rem; }
+        }
+
+        /* Status badge inside modal */
+        #paymentStatusText { font-size: 0.9rem; font-weight: 600; }
+
+        /* Success state */
+        .success-icon { font-size: 4rem; color: #38ef7d; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <i class="fas fa-user-check fa-2x mb-2"></i>
+                    <h3 class="mb-0">Account Activation</h3>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <div class="amount-display">KSh 500</div>
+                        <p class="text-muted">One-time activation fee</p>
+                        <div class="badge bg-light text-dark p-2">
+                            <i class="fas fa-gift"></i> Full access to all features
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Pay KSh 500 to activate your account and get full access to all features.
+                    </div>
+
+                    <form id="paymentForm">
+                        <div class="mb-3">
+                            <label for="phone_number" class="form-label fw-bold">M-Pesa Phone Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text">+254</span>
+                                <input type="tel"
+                                       class="form-control"
+                                       id="phone_number"
+                                       name="phone_number"
+                                       placeholder="712345678"
+                                       maxlength="9"
+                                       required>
+                            </div>
+                            <small class="text-muted mt-2 d-block">
+                                <i class="fas fa-info-circle"></i> Enter the 9-digit number registered with M-Pesa (without 0 or +254)
+                            </small>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100 py-2" id="payBtn">
+                            <i class="fas fa-phone-alt me-2"></i> Pay KSh 500 via M-Pesa
+                        </button>
+                    </form>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <small class="text-muted">
+                            <i class="fas fa-shield-alt me-1"></i> Secure payment via M-Pesa STK Push (PayHero)
+                            <br>You'll receive a prompt on your phone. Enter your PIN to complete payment.
+                            <br><strong>Account will be activated automatically after successful payment.</strong>
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Processing Modal -->
+            <div class="modal fade" id="verificationModal" tabindex="-1" data-bs-backdrop="static">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body text-center py-5">
+                            <div id="processingView">
+                                <div class="spinner-border text-primary mb-3" role="status" style="width:3rem;height:3rem;">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <h5 class="mb-2">Processing Payment...</h5>
+                                <p class="text-muted mb-1">Check your phone for the M-Pesa prompt.</p>
+                                <p id="paymentStatusText" class="text-primary mb-3">Sending STK push request...</p>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:100%"></div>
+                                </div>
+                                <small class="text-muted d-block mt-3">
+                                    <i class="fas fa-clock"></i> This may take up to 30 seconds
+                                </small>
+                            </div>
+
+                            <div id="successView" style="display:none;">
+                                <i class="fas fa-check-circle success-icon mb-3"></i>
+                                <h5 class="text-success mb-2">Payment Confirmed!</h5>
+                                <p class="text-muted mb-1">Your account has been activated.</p>
+                                <p id="receiptText" class="fw-bold text-dark"></p>
+                                <small class="text-muted">Redirecting to dashboard...</small>
+                            </div>
+
+                            <div id="failedView" style="display:none;">
+                                <i class="fas fa-times-circle fa-4x text-danger mb-3"></i>
+                                <h5 class="text-danger mb-2">Payment Failed</h5>
+                                <p id="failedText" class="text-muted mb-3"></p>
+                                <button class="btn btn-outline-secondary" onclick="dismissModal()">Try Again</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// ─────────────────────────────────────────────────────────────
+//  PAYHERO CONFIG — fill in your credentials from the dashboard
+// ─────────────────────────────────────────────────────────────
+const PAYHERO_CONFIG = {
+    // Base64( username + ':' + password )  from PayHero → API Keys
+    basicAuthToken: 'dWNqc0o3MjBpNHpKQWViUEN3WWs6bml4eWc0cE1XdlBiemh6N2d3YUwwd0t3ZElyQ0l3TkxyNnZ5NjE5Qg==',
+
+    // PayHero → Payment Channels → My Payment Channels (numeric ID)
+    channelId: 6241,
+
+    // Amount to charge
+    amount: 500,
+
+    // A publicly accessible URL PayHero will POST the result to.
+    // For a fully static site you can use a free webhook relay such as
+    // webhook.site, n8n, or a Cloudflare Worker.
+    // If you leave this blank the STK push still goes out but you rely
+    // entirely on polling to detect the final status.
+    callbackUrl: 'https://your-callback-url.example.com/payhero',
+
+    // Where to send the user after a confirmed payment
+    redirectUrl: 'onboard.html',
+};
+// ─────────────────────────────────────────────────────────────
+
+const PAYHERO_BASE = 'https://backend.payhero.co.ke/api/v2';
+
+let verificationModal = null;
+let pollInterval = null;
+
+// ── Helpers ──────────────────────────────────────────────────
+
+function normalisePhone(raw) {
+    const digits = raw.replace(/\D/g, '');
+    if (/^(07|01)\d{8}$/.test(digits))  return '254' + digits.slice(1);
+    if (/^[71]\d{8}$/.test(digits))     return '254' + digits;
+    if (/^254[71]\d{8}$/.test(digits))  return digits;
+    return null;
+}
+
+function generateRef() {
+    const rand = Math.random().toString(36).substring(2, 8).toUpperCase();
+    return 'ATP-' + Date.now() + '-' + rand;
+}
+
+function showNotification(message, type = 'info') {
+    const el = document.createElement('div');
+    el.className = `alert alert-${type === 'success' ? 'success' : 'danger'} position-fixed top-0 start-50 translate-middle-x mt-3`;
+    el.style.cssText = 'z-index:9999;min-width:300px;';
+    el.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} me-2"></i>${message}`;
+    document.body.appendChild(el);
+    setTimeout(() => { el.style.opacity = '0'; setTimeout(() => el.remove(), 300); }, 3500);
+}
+
+function setStatus(text, colour = 'primary') {
+    const el = document.getElementById('paymentStatusText');
+    if (el) { el.textContent = text; el.className = `text-${colour} mb-3`; }
+}
+
+function showView(name) {
+    ['processingView', 'successView', 'failedView'].forEach(id => {
+        document.getElementById(id).style.display = (id === name) ? '' : 'none';
+    });
+}
+
+function dismissModal() {
+    clearInterval(pollInterval);
+    if (verificationModal) verificationModal.hide();
+    showView('processingView');
+    setStatus('Sending STK push request...');
+    const btn = document.getElementById('payBtn');
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-phone-alt me-2"></i> Pay KSh 500 via M-Pesa';
+}
+
+// ── PayHero API calls ─────────────────────────────────────────
+
+async function initiateSTKPush(phone, externalRef) {
+    const response = await fetch(`${PAYHERO_BASE}/payments`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Basic ${PAYHERO_CONFIG.basicAuthToken}`,
+        },
+        body: JSON.stringify({
+            amount:             PAYHERO_CONFIG.amount,
+            phone_number:       phone,
+            channel_id:         PAYHERO_CONFIG.channelId,
+            provider:           'm-pesa',
+            external_reference: externalRef,
+            customer_name:      'AllTasksPro User',
+            callback_url:       PAYHERO_CONFIG.callbackUrl,
+        }),
+    });
+
+    if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.message || `PayHero error ${response.status}`);
+    }
+
+    return response.json(); // { success, status:"QUEUED", reference, CheckoutRequestID }
+}
+
+async function checkTransactionStatus(reference) {
+    const response = await fetch(
+        `${PAYHERO_BASE}/transaction-status?reference=${encodeURIComponent(reference)}`,
+        {
+            headers: {
+                'Authorization': `Basic ${PAYHERO_CONFIG.basicAuthToken}`,
+            },
+        }
+    );
+
+    if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.message || `Status check error ${response.status}`);
+    }
+
+    return response.json(); // { status:"QUEUED"|"SUCCESS"|"FAILED", reference, ... }
+}
+
+// ── Polling ───────────────────────────────────────────────────
+
+function pollStatus(reference) {
+    let attempts = 0;
+    const MAX_ATTEMPTS = 20;       // 20 × 3 s = 60 s timeout
+    const INTERVAL_MS  = 3000;
+
+    setStatus(`Waiting for M-Pesa confirmation... (0/${MAX_ATTEMPTS})`);
+
+    pollInterval = setInterval(async () => {
+        attempts++;
+        setStatus(`Waiting for confirmation... (${attempts}/${MAX_ATTEMPTS})`);
+
+        try {
+            const data = await checkTransactionStatus(reference);
+            const status = (data.status || '').toUpperCase();
+
+            if (status === 'SUCCESS') {
+                clearInterval(pollInterval);
+                const receipt = data.provider_reference || data.MpesaReceiptNumber || '';
+                document.getElementById('receiptText').textContent =
+                    receipt ? `Receipt: ${receipt}` : '';
+                showView('successView');
+                setTimeout(() => {
+                    if (verificationModal) verificationModal.hide();
+                    window.location.href = PAYHERO_CONFIG.redirectUrl;
+                }, 2500);
+                return;
+            }
+
+            if (status === 'FAILED') {
+                clearInterval(pollInterval);
+                document.getElementById('failedText').textContent =
+                    data.result_desc || 'The payment was declined or cancelled.';
+                showView('failedView');
+                return;
+            }
+
+            // QUEUED / anything else — keep polling
+            if (attempts >= MAX_ATTEMPTS) {
+                clearInterval(pollInterval);
+                document.getElementById('failedText').textContent =
+                    'Payment not confirmed within the timeout. If you entered your PIN, please contact support.';
+                showView('failedView');
+            }
+
+        } catch (err) {
+            console.error('Poll error:', err);
+            setStatus('Network error — retrying...', 'warning');
+        }
+
+    }, INTERVAL_MS);
+}
+
+// ── Form submit ───────────────────────────────────────────────
+
+document.getElementById('paymentForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    // Config guard
+    if (!PAYHERO_CONFIG.basicAuthToken || PAYHERO_CONFIG.basicAuthToken === 'YOUR_BASE64_BASIC_AUTH_TOKEN') {
+        showNotification('Payment not configured yet. Please set up PayHero credentials.', 'error');
+        return;
+    }
+    if (!PAYHERO_CONFIG.channelId) {
+        showNotification('PayHero channel ID is not set.', 'error');
+        return;
+    }
+
+    const rawPhone = document.getElementById('phone_number').value.trim();
+    const phone    = normalisePhone(rawPhone);
+
+    if (!phone) {
+        showNotification('Invalid phone number. Use format: 712345678', 'error');
+        return;
+    }
+
+    const btn = document.getElementById('payBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Processing...';
+
+    verificationModal = new bootstrap.Modal(document.getElementById('verificationModal'));
+    showView('processingView');
+    setStatus('Sending STK push request...');
+    verificationModal.show();
+
+    const externalRef = generateRef();
+
+    try {
+        const data = await initiateSTKPush(phone, externalRef);
+
+        if (data.success === false) {
+            throw new Error(data.message || 'STK push failed');
+        }
+
+        // PayHero returns its own reference; use it for polling
+        const ref = data.reference || externalRef;
+        setStatus('M-Pesa prompt sent — enter your PIN on your phone.');
+        pollStatus(ref);
+
+    } catch (error) {
+        console.error('Payment init error:', error);
+        document.getElementById('failedText').textContent = error.message || 'Failed to initiate payment.';
+        showView('failedView');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-phone-alt me-2"></i> Pay KSh 500 via M-Pesa';
+    }
+});
+
+// Digits only in phone field
+document.getElementById('phone_number').addEventListener('input', function () {
+    this.value = this.value.replace(/\D/g, '').slice(0, 9);
+});
+</script>
+</body>
+</html>
